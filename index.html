@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Energy Changes | Carbon Emissions Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-block">
+      <img src="https://media.energy-changes.com/images/static/logo-512.png" alt="Energy Changes logo" />
+      <div>
+        <p class="brand-name">Energy Changes</p>
+        <p class="brand-tagline">Unlocking Carbon Finance to Accelerate Climate Action</p>
+      </div>
+    </div>
+    <nav>
+      <a href="https://www.energy-changes.com/" target="_blank" rel="noreferrer">Main Website</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="welcome">
+      <div class="hero-content">
+        <p class="eyebrow">Business Carbon Footprint Tool</p>
+        <h1>Understand your company’s carbon footprint in minutes.</h1>
+        <p>
+          This easy assessment gives you a practical estimate of annual emissions and introduces
+          how carbon credits can help you take responsibility. It takes about 15–20 minutes.
+        </p>
+        <button class="primary" data-action="start">Start Assessment</button>
+      </div>
+      <div class="hero-card">
+        <h2>What you will get</h2>
+        <ul>
+          <li>Estimated footprint across key business areas</li>
+          <li>Visual breakdown and comparison insights</li>
+          <li>A sample offset portfolio tailored to your results</li>
+        </ul>
+        <div class="note">
+          <span>Note:</span> This is a simplified estimate for educational purposes.
+        </div>
+      </div>
+    </section>
+
+    <section class="assessment" id="assessment">
+      <div class="progress">
+        <div class="progress-label">Step <span id="step-count">1</span> of 10</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <form id="calculator" novalidate>
+        <div class="step" data-step="1">
+          <h2>Step 1: Company information</h2>
+          <div class="field-grid">
+            <label>
+              Company name
+              <input type="text" name="companyName" required placeholder="Company name" />
+            </label>
+            <label>
+              Industry sector
+              <select name="industry" required>
+                <option value="">Select an option</option>
+                <option>Manufacturing</option>
+                <option>Retail &amp; Wholesale</option>
+                <option>Professional Services</option>
+                <option>Technology &amp; IT</option>
+                <option>Healthcare</option>
+                <option>Hospitality &amp; Tourism</option>
+                <option>Construction</option>
+                <option>Transportation &amp; Logistics</option>
+                <option>Agriculture &amp; Food Production</option>
+                <option>Education</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="field-conditional" data-show-when="industry" data-value="Other">
+              Please specify
+              <input type="text" name="industryOther" placeholder="Your industry" />
+            </label>
+            <label>
+              Company size (employees)
+              <select name="companySize" required>
+                <option value="">Select an option</option>
+                <option>1-10 employees</option>
+                <option>11-50 employees</option>
+                <option>51-200 employees</option>
+                <option>201-500 employees</option>
+                <option>500+ employees</option>
+              </select>
+            </label>
+            <label>
+              Location in Austria
+              <select name="location" required>
+                <option value="">Select a state</option>
+                <option>Burgenland</option>
+                <option>Carinthia</option>
+                <option>Lower Austria</option>
+                <option>Upper Austria</option>
+                <option>Salzburg</option>
+                <option>Styria</option>
+                <option>Tyrol</option>
+                <option>Vorarlberg</option>
+                <option>Vienna</option>
+              </select>
+            </label>
+            <label>
+              Your role (optional)
+              <select name="respondentRole">
+                <option value="">Select an option</option>
+                <option>CEO/Owner</option>
+                <option>Sustainability Manager</option>
+                <option>Operations Manager</option>
+                <option>Finance/Accounting</option>
+                <option>HR Manager</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="step" data-step="2">
+          <h2>Step 2: Facilities &amp; energy</h2>
+          <div class="field-grid">
+            <label>
+              Office space size
+              <select name="officeSize" required>
+                <option value="">Select an option</option>
+                <option>Under 100 m²</option>
+                <option>100-500 m²</option>
+                <option>500-1,000 m²</option>
+                <option>1,000-5,000 m²</option>
+                <option>5,000+ m²</option>
+              </select>
+            </label>
+            <label>
+              Primary heating source
+              <select name="heating" required>
+                <option value="">Select an option</option>
+                <option>Natural gas</option>
+                <option>Oil/heating oil</option>
+                <option>District heating</option>
+                <option>Electric heating</option>
+                <option>Heat pump</option>
+                <option>Other/Mixed</option>
+              </select>
+            </label>
+            <label>
+              Do you use air conditioning?
+              <select name="aircon" required>
+                <option value="">Select an option</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Partially</option>
+              </select>
+            </label>
+            <label>
+              Monthly electricity usage
+              <select name="electricity" required>
+                <option value="">Select an option</option>
+                <option>Under 1,000 kWh</option>
+                <option>1,000-5,000 kWh</option>
+                <option>5,000-10,000 kWh</option>
+                <option>10,000-50,000 kWh</option>
+                <option>50,000+ kWh</option>
+                <option>Don't know</option>
+              </select>
+            </label>
+            <label>
+              Renewable energy use
+              <select name="renewables" required>
+                <option value="">Select an option</option>
+                <option>Yes, 100% renewable</option>
+                <option>Partially renewable</option>
+                <option>No</option>
+                <option>Don't know</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="step" data-step="3">
+          <h2>Step 3: Transportation &amp; travel</h2>
+          <div class="field-grid">
+            <label>
+              Company vehicles
+              <select name="vehicles" required>
+                <option value="">Select an option</option>
+                <option>None</option>
+                <option>1-5 vehicles</option>
+                <option>6-20 vehicles</option>
+                <option>20+ vehicles</option>
+              </select>
+            </label>
+            <label class="field-conditional" data-show-when="vehicles" data-value="1-5 vehicles,6-20 vehicles,20+ vehicles">
+              Primary fuel type
+              <select name="fuelType">
+                <option value="">Select an option</option>
+                <option>Petrol</option>
+                <option>Diesel</option>
+                <option>Hybrid</option>
+                <option>Electric</option>
+                <option>Mixed</option>
+              </select>
+            </label>
+            <label>
+              Annual business travel by car
+              <select name="carTravel" required>
+                <option value="">Select an option</option>
+                <option>Under 10,000 km</option>
+                <option>10,000-50,000 km</option>
+                <option>50,000-150,000 km</option>
+                <option>150,000+ km</option>
+              </select>
+            </label>
+            <label>
+              Annual business flights
+              <select name="flights" required>
+                <option value="">Select an option</option>
+                <option>None</option>
+                <option>1-10 short-haul flights</option>
+                <option>11-50 short-haul flights</option>
+                <option>1-10 long-haul flights</option>
+                <option>11+ long-haul flights</option>
+                <option>Mixed (rough estimate)</option>
+              </select>
+            </label>
+            <label>
+              Employee commuting support
+              <select name="commuteSupport" required>
+                <option value="">Select an option</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Partially</option>
+              </select>
+            </label>
+            <label>
+              Main commuting split
+              <select name="commuteSplit" required>
+                <option value="">Select an option</option>
+                <option>Mostly car</option>
+                <option>Balanced</option>
+                <option>Mostly public transport</option>
+                <option>Mostly cycling/walking</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="step" data-step="4">
+          <h2>Step 4: Operations &amp; supply chain</h2>
+          <div class="field-grid">
+            <label>
+              Purchase raw materials or goods?
+              <select name="procurement" required>
+                <option value="">Select an option</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label class="field-conditional" data-show-when="procurement" data-value="Yes">
+              Annual procurement spend
+              <select name="procurementSpend">
+                <option value="">Select an option</option>
+                <option>Under €50,000</option>
+                <option>€50,000-€250,000</option>
+                <option>€250,000-€1,000,000</option>
+                <option>€1,000,000+</option>
+              </select>
+            </label>
+            <label>
+              Weekly waste volume
+              <select name="waste" required>
+                <option value="">Select an option</option>
+                <option>Minimal (1-2 bags)</option>
+                <option>Moderate (3-10 bags)</option>
+                <option>Significant (multiple bins/containers)</option>
+                <option>Large scale (industrial waste)</option>
+              </select>
+            </label>
+            <label>
+              Recycling practices
+              <select name="recycling" required>
+                <option value="">Select an option</option>
+                <option>Yes, most waste</option>
+                <option>Partially</option>
+                <option>No</option>
+                <option>Don't know</option>
+              </select>
+            </label>
+            <div class="industry-block" data-industry="Manufacturing">
+              <h3>Manufacturing add-on</h3>
+              <label>
+                Production machinery in use?
+                <select name="manufacturingMachinery">
+                  <option value="">Select an option</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </label>
+              <label>
+                Estimated annual production volume
+                <input type="text" name="manufacturingVolume" placeholder="e.g., 12,000 units" />
+              </label>
+            </div>
+            <div class="industry-block" data-industry="Hospitality & Tourism">
+              <h3>Hospitality add-on</h3>
+              <label>
+                Guest rooms or seats
+                <input type="text" name="hospitalitySeats" placeholder="e.g., 80 rooms" />
+              </label>
+              <label>
+                Food service operations
+                <select name="hospitalityFood">
+                  <option value="">Select an option</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                </select>
+              </label>
+            </div>
+            <div class="industry-block" data-industry="Transportation & Logistics">
+              <h3>Transportation add-on</h3>
+              <label>
+                Fleet size for logistics
+                <input type="text" name="logisticsFleet" placeholder="e.g., 25 vehicles" />
+              </label>
+              <label>
+                Estimated annual freight volume
+                <input type="text" name="logisticsVolume" placeholder="e.g., 120,000 tonne-km" />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" data-step="5">
+          <h2>Step 5: Remote work &amp; digital</h2>
+          <div class="field-grid">
+            <label>
+              Remote work share
+              <input type="range" name="remoteWork" min="0" max="100" value="0" />
+              <span class="range-value" data-range="remoteWork">0%</span>
+            </label>
+            <label>
+              Data center/cloud usage
+              <select name="cloudUsage" required>
+                <option value="">Select an option</option>
+                <option>None</option>
+                <option>Minimal</option>
+                <option>Moderate</option>
+                <option>Significant</option>
+              </select>
+            </label>
+            <label>
+              Sustainability initiatives
+              <select name="policies" required>
+                <option value="">Select an option</option>
+                <option>Yes</option>
+                <option>Some</option>
+                <option>No</option>
+                <option>Planning to</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="step" data-step="6">
+          <h2>Step 6: Your estimated carbon footprint</h2>
+          <div class="results">
+            <div>
+              <p class="result-label">Total estimated annual emissions</p>
+              <p class="result-value"><span id="total-emissions">0</span> tonnes CO2e</p>
+              <p class="disclaimer">
+                This is a simplified estimate for educational purposes. For a detailed carbon footprint
+                assessment, contact Energy Changes.
+              </p>
+            </div>
+            <div class="chart">
+              <h3>Emissions breakdown</h3>
+              <div class="chart-bars" id="chart-bars"></div>
+            </div>
+          </div>
+          <div class="comparison" id="comparison"></div>
+        </div>
+
+        <div class="step" data-step="7">
+          <h2>Step 7: Understanding carbon credits</h2>
+          <div class="content-card">
+            <p>
+              Carbon credits represent one tonne of CO2e reduced or removed from the atmosphere.
+              When a company buys credits, it supports projects that deliver measurable climate benefits.
+              These credits help balance unavoidable emissions while wider decarbonisation is underway.
+            </p>
+            <p>
+              Credits are created by verified projects such as renewable energy, nature-based solutions,
+              and community initiatives. Each credit is tracked and certified to ensure credibility.
+            </p>
+            <p>
+              Companies use carbon credits to take responsibility for their footprint, meet stakeholder
+              expectations, and finance climate action beyond their operations.
+            </p>
+          </div>
+          <div class="card-grid">
+            <div class="info-card">
+              <h3>Renewable Energy</h3>
+              <p>Wind, solar, and hydro projects that displace fossil fuels.</p>
+            </div>
+            <div class="info-card">
+              <h3>Reforestation &amp; Conservation</h3>
+              <p>Protects forests and restores ecosystems.</p>
+            </div>
+            <div class="info-card">
+              <h3>Community Development</h3>
+              <p>Clean cooking, water access, and local resilience.</p>
+            </div>
+            <div class="info-card">
+              <h3>Technology &amp; Innovation</h3>
+              <p>Carbon capture, biochar, and advanced solutions.</p>
+            </div>
+          </div>
+          <blockquote>
+            “High-quality carbon markets channel funding to climate solutions that would not otherwise happen.”
+          </blockquote>
+          <a class="text-link" href="https://www.energy-changes.com/" target="_blank" rel="noreferrer">
+            Learn about Energy Changes’ approach
+          </a>
+        </div>
+
+        <div class="step" data-step="8">
+          <h2>Step 8: Build your portfolio</h2>
+          <p class="lead">Select projects and allocate your portfolio. Adjust percentages so the total reaches 100% (or choose a partial offset).</p>
+          <div class="portfolio-summary">
+            <div>
+              <p class="result-label">Your emissions</p>
+              <p class="result-value"><span id="portfolio-emissions">0</span> tonnes CO2e</p>
+            </div>
+            <div>
+              <p class="result-label">Estimated annual offset cost</p>
+              <p class="result-value">€<span id="portfolio-cost">0</span></p>
+            </div>
+            <div>
+              <p class="result-label">Allocated</p>
+              <p class="result-value"><span id="portfolio-percent">0</span>%</p>
+            </div>
+          </div>
+          <div class="project-grid" id="project-grid"></div>
+          <div class="portfolio-actions">
+            <label>
+              Offset amount
+              <select id="offset-level">
+                <option value="100">100% of emissions</option>
+                <option value="75">75% of emissions</option>
+                <option value="50">50% of emissions</option>
+                <option value="25">25% of emissions</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="step" data-step="9">
+          <h2>Step 9: Portfolio summary &amp; contact</h2>
+          <div class="summary-grid">
+            <div class="content-card">
+              <h3>Your portfolio</h3>
+              <p>Your estimated emissions: <strong><span id="summary-emissions">0</span> tonnes CO2e/year</strong></p>
+              <div id="summary-breakdown"></div>
+              <p class="result-label">Estimated annual offset cost</p>
+              <p class="result-value">€<span id="summary-cost">0</span></p>
+              <p class="note">
+                This is a sample portfolio. Energy Changes can tailor a real solution to your goals.
+              </p>
+            </div>
+            <div class="content-card">
+              <h3>Request a consultation</h3>
+              <div class="field-grid">
+                <label>
+                  Name
+                  <input type="text" name="contactName" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="contactEmail" required />
+                </label>
+                <label>
+                  Phone (optional)
+                  <input type="tel" name="contactPhone" />
+                </label>
+                <label>
+                  Company name
+                  <input type="text" name="contactCompany" />
+                </label>
+                <label>
+                  Preferred contact method
+                  <select name="contactMethod" required>
+                    <option value="">Select an option</option>
+                    <option>Email</option>
+                    <option>Phone</option>
+                    <option>Either</option>
+                  </select>
+                </label>
+                <label>
+                  Best time to contact
+                  <select name="contactTime" required>
+                    <option value="">Select an option</option>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Anytime</option>
+                  </select>
+                </label>
+                <label class="full-width">
+                  Message (optional)
+                  <textarea name="contactMessage" rows="3"></textarea>
+                </label>
+                <label class="checkbox full-width">
+                  <input type="checkbox" name="contactConsent" required />
+                  I agree to be contacted by Energy Changes.
+                </label>
+              </div>
+              <button class="primary" type="submit" data-action="submit">Request Consultation</button>
+              <p class="form-status" id="form-status" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="content-card">
+            <h3>Contact us directly</h3>
+            <p>Email: <strong>[PLACEHOLDER_EMAIL]</strong></p>
+            <p>Phone: <strong>[PLACEHOLDER_PHONE]</strong></p>
+            <p>Address: <strong>Vienna, Austria [PLACEHOLDER_ADDRESS]</strong></p>
+            <a class="text-link" href="https://www.energy-changes.com/contact-us/" target="_blank" rel="noreferrer">Visit contact page</a>
+          </div>
+        </div>
+
+        <div class="step" data-step="10">
+          <h2>Thank you!</h2>
+          <div class="content-card">
+            <p>
+              Thank you! Our team will contact you within 2 business days. You can download or print
+              your summary below.
+            </p>
+            <div class="button-row">
+              <button class="secondary" type="button" data-action="print">Print / Save PDF</button>
+              <button class="primary" type="button" data-action="restart">Start Over</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="secondary" type="button" data-action="back">Back</button>
+          <button class="primary" type="button" data-action="next">Continue</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Energy Changes · Vienna, Austria · <a href="https://www.energy-changes.com/" target="_blank" rel="noreferrer">energy-changes.com</a></p>
+  </footer>
+
+  <script src="data/projects.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
